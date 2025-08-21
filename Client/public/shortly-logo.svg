@@ -1,0 +1,18 @@
+<!-- filepath: c:\Users\Admin\OneDrive\Desktop\Url_Shortner\Client\public\shortly-logo.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="16" fill="url(#bg-gradient)"/>
+  <g filter="url(#shadow)">
+    <path d="M22 32a10 10 0 0110-10h6a10 10 0 110 20h-4" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M42 32a10 10 0 00-10-10h-6a10 10 0 100 20h4" stroke="#6366f1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="32,24 36,32 30,32 34,40" fill="#22d3ee" stroke="#0ea5e9" stroke-width="1.5" stroke-linejoin="round"/>
+  </g>
+  <defs>
+    <linearGradient id="bg-gradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e0e7ff"/>
+      <stop offset="1" stop-color="#bae6fd"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="64" height="64" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+</svg>

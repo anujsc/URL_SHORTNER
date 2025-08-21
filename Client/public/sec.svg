@@ -1,0 +1,15 @@
+<!-- filepath: c:\Users\Admin\OneDrive\Desktop\Url_Shortner\Client\public\shortly-s-logo.svg -->
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="16" fill="url(#bg2)"/>
+  <g>
+    <path d="M20 32c0-6.627 5.373-12 12-12s12 5.373 12 12-5.373 12-12 12" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+    <path d="M44 32c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12" stroke="#06b6d4" stroke-width="3" stroke-linecap="round"/>
+    <text x="32" y="38" text-anchor="middle" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#6366f1" font-weight="bold">S</text>
+  </g>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f0f9ff"/>
+      <stop offset="1" stop-color="#dbeafe"/>
+    </linearGradient>
+  </defs>
+</svg>
