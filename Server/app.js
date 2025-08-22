@@ -16,8 +16,11 @@ dotenv.config("./.env")
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173', // your React app
-    credentials: true // 👈 this allows cookies to be sent
+  origin: [
+    'http://localhost:5173',                                    // For local development
+    'https://url-shortner-client-0lrg.onrender.com'           // For production
+  ],
+  credentials: true
 }));
 
 app.use(express.json())
