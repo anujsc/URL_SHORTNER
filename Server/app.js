@@ -35,18 +35,7 @@ app.get("/:id",redirectFromShortUrl)
 
 app.use(errorHandler)
 
-let isConnected=false;
-
-app.use((req,res,next)=>{
-  if(!isConnected){
-    connectDB();
-  }
-  next();
+app.listen(3000,()=>{
+    connectDB()
+    console.log("Server is running on http://localhost:3000");
 })
-
-// app.listen(3000,()=>{
-//     connectDB()
-//     console.log("Server is running on http://localhost:3000");
-// })
-
-module.exports=app
