@@ -21,6 +21,7 @@ export const cookieOptions = {
   secure: true,     // required on https
   sameSite: "None", // allow cross-site (frontend + backend different subdomains)
   maxAge: 7 * 24 * 60 * 60 * 1000,
-  path: '/'
+  path: '/',
+  domain:undefined
 }
 

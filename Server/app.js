@@ -14,20 +14,18 @@ dotenv.config("./.env")
 
 const app = express();
 
-const allowedOrigins = [                 // dev
-  "https://url-shortner-f-vwjq.onrender.com", // your deployed frontend
-];
-
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true, // allow cookies
+  origin: [
+    'http://localhost:3000', // For local development
+    'https://your-frontend-app-name.onrender.com', // Your actual Render frontend URL
+  ],
+  credentials: true, // This is crucial for cookies
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+// Trust proxy (important for Render deployment)
+app.set('trust proxy', 1);
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
