@@ -17,7 +17,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000', // For local development
-    'https://your-frontend-app-name.onrender.com', // Your actual Render frontend URL
+    'https://url-shortner-f-vwjq.onrender.com', // Your actual Render frontend URL
   ],
   credentials: true, // This is crucial for cookies
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
