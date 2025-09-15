@@ -20,7 +20,8 @@ app.use(cors({
     if (!origin) return callback(null, true);
     
     const allowedOrigins = [
-      'http://localhost:5173', // If using Vercel
+      'http://localhost:5173',
+      'https://url-shortner-f-vwjq.onrender.com' // If using Vercel
     ];
     
     if (allowedOrigins.includes(origin)) {
