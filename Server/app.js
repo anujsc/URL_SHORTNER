@@ -15,9 +15,21 @@ dotenv.config("./.env")
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:3000'], // Add your actual frontend URL
-  credentials: true,
-  optionsSuccessStatus: 200
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://localhost:5173', // If using Vercel
+    ];
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
 
 app.use(express.json())
