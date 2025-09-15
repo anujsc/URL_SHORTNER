@@ -4,8 +4,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
     "dev": "nodemon app.js",
+    "build":"npm install && npm install --prefix Client && npm run build",
+    "start":"nodemon app.js",
+    "vercel-start":"node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

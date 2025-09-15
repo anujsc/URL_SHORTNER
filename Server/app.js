@@ -5,7 +5,6 @@ import auth_routes from "./src/routes/auth.route.js"
 import cookieParser from "cookie-parser";
 import {attachUser} from "./src/utils/attachUser.js"
 import user_routes from "./src/routes/user.routes.js"
-
 import { createShortUrl, redirectFromShortUrl } from "./src/controller/short_url.controller.js";
 import { errorHandler } from "./src/utils/errorHandler.js";
 import cors from "cors"
@@ -36,7 +35,18 @@ app.get("/:id",redirectFromShortUrl)
 
 app.use(errorHandler)
 
-app.listen(3000,()=>{
-    connectDB()
-    console.log("Server is running on http://localhost:3000");
+let isConnected=false;
+
+app.use((req,res,next)=>{
+  if(!isConnected){
+    connectDB();
+  }
+  next();
 })
+
+// app.listen(3000,()=>{
+//     connectDB()
+//     console.log("Server is running on http://localhost:3000");
+// })
+
+module.exports=app
