@@ -19,7 +19,7 @@ export default connectDB;
 export const cookieOptions = {
  httpOnly: true,
   secure: true,     // required on https
-  sameSite: "none", // allow cross-site (frontend + backend different subdomains)
+  sameSite: "None", // allow cross-site (frontend + backend different subdomains)
   maxAge: 7 * 24 * 60 * 60 * 1000,
   path: '/'
 }

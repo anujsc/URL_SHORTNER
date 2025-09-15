@@ -14,8 +14,7 @@ dotenv.config("./.env")
 
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:5173",                  // dev
+const allowedOrigins = [                 // dev
   "https://url-shortner-f-vwjq.onrender.com", // your deployed frontend
 ];
 
