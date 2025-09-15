@@ -18,9 +18,8 @@ export default connectDB;
 
 export const cookieOptions = {
     httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
-  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-  maxAge: 24 * 60 * 60 * 1000,
-  path: '/'
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Lax",
+    maxAge: 1000 * 60 * 60, // 5 minutes
 }
 
