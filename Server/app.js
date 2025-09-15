@@ -14,23 +14,20 @@ dotenv.config("./.env")
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",                  // dev
+  "https://url-shortner-f-vwjq.onrender.com", // your deployed frontend
+];
+
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, etc.)
-    if (!origin) return callback(null, true);
-    
-    const allowedOrigins = [
-      'http://localhost:5173',
-      'https://url-shortner-f-vwjq.onrender.com' // If using Vercel
-    ];
-    
-    if (allowedOrigins.includes(origin)) {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true
+  credentials: true, // allow cookies
 }));
 
 app.use(express.json())
@@ -50,3 +47,6 @@ app.listen(3000,()=>{
     connectDB()
     console.log("Server is running on http://localhost:3000");
 })
+
+
+// 'https://url-shortner-f-vwjq.onrender.com'

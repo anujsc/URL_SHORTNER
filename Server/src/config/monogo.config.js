@@ -17,10 +17,10 @@ export default connectDB;
 
 
 export const cookieOptions = {
-    httpOnly: true,
-  secure: true,
-  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-  maxAge: 24 * 60 * 60 * 1000,
+ httpOnly: true,
+  secure: true,     // required on https
+  sameSite: "none", // allow cross-site (frontend + backend different subdomains)
+  maxAge: 7 * 24 * 60 * 60 * 1000,
   path: '/'
 }
 
