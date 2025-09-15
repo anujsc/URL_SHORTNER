@@ -16,10 +16,11 @@ dotenv.config("./.env")
 const app = express();
 
 app.use(cors({
-  origin: ['https://mellifluous-crepe-ebe252.netlify.app', 'http://localhost:3000'],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: [
+    'http://localhost:5173'                                   // For local development
+     // For production
+  ],
+  credentials: true
 }));
 
 app.use(express.json())

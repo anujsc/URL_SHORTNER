@@ -1,10 +1,13 @@
 import axios from "axios"
 
 const axiosInstance = axios.create({
-    baseURL:"https://url-shortner-n9y1.onrender.com",
-    timeout:10000, //10s
-    withCredentials:true
-})
+  baseURL: 'http://localhost:3000/',
+  timeout: 10000,
+  withCredentials: true, // Keep this if you need to send cookies/auth
+  headers: {
+    'Content-Type': 'application/json',
+  }
+});
 
 // Response interceptor
 axiosInstance.interceptors.response.use(
