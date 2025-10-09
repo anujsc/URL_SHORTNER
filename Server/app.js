@@ -16,7 +16,7 @@ const app = express();
 
 app.use(cors({
   origin: [
-    'http://localhost:3000', // For local development
+    'http://localhost:5173', // For local development
     'https://url-shortner-f-vwjq.onrender.com', // Your actual Render frontend URL
   ],
   credentials: true, // This is crucial for cookies
