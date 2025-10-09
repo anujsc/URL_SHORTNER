@@ -14,7 +14,7 @@ dotenv.config("./.env")
 
 const app = express();
 
-const FRONTEND_ORIGINS = (process.env.FRONTEND_ORIGINS || 'http://localhost:5173,https://url-shortner-f-vwjq.onrender.com')
+const FRONTEND_ORIGINS =  'https://url-shortner-f-vwjq.onrender.com'
   .split(',')
   .map(s => s.trim())
   .filter(Boolean)
