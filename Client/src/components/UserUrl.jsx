@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getAllUserUrls } from '../api/user.api'
 
+// Determine the public base URL for short links. Prefer a Vite env var, then the
+// API URL, and finally fall back to the current origin. This lets the UI show
+// and copy the correct deployed host instead of hardcoded localhost.
+const BASE_URL = (import.meta.env.VITE_APP_BASE_URL || import.meta.env.VITE_API_URL || window.location.origin).replace(/\/+$/,'')
+
 const UserUrl = () => {
   const { data: urls, isLoading, isError, error } = useQuery({
     queryKey: ['userUrls'],
@@ -74,12 +79,12 @@ const UserUrl = () => {
                 </td>
                 <td className="px-2 sm:px-6 py-4 max-w-[120px] sm:max-w-xs truncate">
                   <a
-                    href={`https://url-shortner-n9y1.onrender.com/${url.short_url}`}
+                    href={`${BASE_URL}/${url.short_url}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-indigo-700 hover:underline break-all font-semibold transition"
                   >
-                    {`localhost:3000/${url.short_url}`}
+                    {`${BASE_URL}/${url.short_url}`}
                   </a>
                 </td>
                 <td className="px-2 sm:px-6 py-4">
@@ -89,7 +94,7 @@ const UserUrl = () => {
                 </td>
                 <td className="px-2 sm:px-6 py-4 text-xs sm:text-sm font-medium">
                   <button
-                    onClick={() => handleCopy(`https://url-shortner-n9y1.onrender.com/${url.short_url}`, url._id)}
+                    onClick={() => handleCopy(`${BASE_URL}/${url.short_url}`, url._id)}
                     className={`inline-flex items-center px-3 py-1.5 border border-transparent font-semibold rounded-full shadow-md ${
                       copiedId === url._id
                         ? 'bg-green-500 text-white hover:bg-green-600'
@@ -132,12 +137,12 @@ const UserUrl = () => {
             <div className="mb-2">
               <span className="block text-xs text-blue-700 font-bold uppercase">Short URL</span>
               <a
-                href={`https://url-shortner-n9y1.onrender.com/${url.short_url}`}
+                href={`${BASE_URL}/${url.short_url}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-indigo-700 hover:underline break-all font-semibold transition"
               >
-                {`localhost:3000/${url.short_url}`}
+                {`${BASE_URL}/${url.short_url}`}
               </a>
             </div>
             <div className="mb-2">
@@ -148,7 +153,7 @@ const UserUrl = () => {
             </div>
             <div>
               <button
-                onClick={() => handleCopy(`https://url-shortner-n9y1.onrender.com/${url.short_url}`, url._id)}
+                onClick={() => handleCopy(`${BASE_URL}/${url.short_url}`, url._id)}
                 className={`inline-flex items-center px-3 py-1.5 border border-transparent font-semibold rounded-full shadow-md ${
                   copiedId === url._id
                     ? 'bg-green-500 text-white hover:bg-green-600'
