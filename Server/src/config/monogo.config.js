@@ -15,13 +15,19 @@ const connectDB = async () => {
 
 export default connectDB;
 
-
+// Cookie options used when setting auth cookies. Make values environment-aware so
+// local development (http://localhost) does not require secure cookies.
 export const cookieOptions = {
- httpOnly: true,
-  secure: true,     // required on https
-  sameSite: "None", // allow cross-site (frontend + backend different subdomains)
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'None', // allow cross-site (frontend + backend different origins)
   maxAge: 7 * 24 * 60 * 60 * 1000,
   path: '/',
-  domain:undefined
+  // domain: undefined // leave undefined by default; set via env if needed for a custom domain
 }
+
+export const getCookieOptionsForDomain = (domain) => ({
+  ...cookieOptions,
+  domain,
+});
 

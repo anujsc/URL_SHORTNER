@@ -1,6 +1,6 @@
 import { loginUser, registerUser } from "../services/auth.service.js"
 import wrapAsync from "../utils/tryCatchWrapper.js"
-import cookieOptions from "../config/monogo.config.js"
+import { cookieOptions } from "../config/monogo.config.js"
 
 export const register_user = wrapAsync( async (req, res) => {
     const {name, email, password} = req.body

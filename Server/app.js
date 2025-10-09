@@ -14,14 +14,21 @@ dotenv.config("./.env")
 
 const app = express();
 
+const FRONTEND_ORIGINS = (process.env.FRONTEND_ORIGINS || 'http://localhost:5173,https://url-shortner-f-vwjq.onrender.com')
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean)
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173', // For local development
-    'https://url-shortner-f-vwjq.onrender.com', // Your actual Render frontend URL
-  ],
+  origin: (origin, cb) => {
+    // allow requests with no origin like mobile apps or curl
+    if (!origin) return cb(null, true)
+    if (FRONTEND_ORIGINS.indexOf(origin) !== -1) return cb(null, true)
+    return cb(new Error('CORS policy does not allow access from the specified Origin.'), false)
+  },
   credentials: true, // This is crucial for cookies
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
 }));
 
 // Trust proxy (important for Render deployment)
@@ -40,9 +47,11 @@ app.get("/:id",redirectFromShortUrl)
 
 app.use(errorHandler)
 
-app.listen(3000,()=>{
-    connectDB()
-    console.log("Server is running on http://localhost:3000");
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT,()=>{
+  connectDB()
+  console.log(`Server is running on http://localhost:${PORT}`);
 })
 
 

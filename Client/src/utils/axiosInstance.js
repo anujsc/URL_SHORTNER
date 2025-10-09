@@ -1,12 +1,17 @@
 import axios from "axios"
 
+// Use Vite env var VITE_API_URL to allow switching between deployed backend and local dev.
+// For example, in development you can set VITE_API_URL=http://localhost:3000
+// or VITE_API_URL=https://url-shortner-1-nn0p.onrender.com to target deployed backend.
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
+
 const axiosInstance = axios.create({
-  baseURL: 'https://url-shortner-1-nn0p.onrender.com',
-  timeout: 10000,
-  withCredentials: true, // Keep this if you need to send cookies/auth
-  headers: {
-    'Content-Type': 'application/json',
-  }
+    baseURL: BASE_URL,
+    timeout: 10000,
+    withCredentials: true, // Keep this to send cookies/auth
+    headers: {
+        'Content-Type': 'application/json',
+    }
 });
 
 // Response interceptor
