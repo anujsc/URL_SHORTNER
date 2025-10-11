@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { createShortUrl } from "../api/shortUrl.api";
+import { BASE_URL } from '../utils/axiosInstance'
 import { useSelector } from "react-redux";
 import { queryClient } from "../client";
 
 const UrlForm = () => {
   const [url, setUrl] = useState("");
+  // shortUrlFull is the actual usable URL (including BASE_URL)
+  // shortUrl is the display value returned by backend or built from slug
   const [shortUrl, setShortUrl] = useState();
+  const [shortUrlFull, setShortUrlFull] = useState();
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState(null);
   const [customSlug, setCustomSlug] = useState("");
@@ -13,8 +17,17 @@ const UrlForm = () => {
 
   const handleSubmit = async () => {
     try {
-      const shortUrl = await createShortUrl(url, customSlug);
-      setShortUrl(shortUrl);
+      const shortUrlFromApi = await createShortUrl(url, customSlug);
+      // createShortUrl may return either a full URL or a path/slug. Normalize it.
+      let full = shortUrlFromApi;
+      if (shortUrlFromApi && !/^https?:\/\//i.test(shortUrlFromApi)) {
+        // if it's a path like /abc or abc, compose with BASE_URL
+        const path = shortUrlFromApi.startsWith('/') ? shortUrlFromApi.slice(1) : shortUrlFromApi
+        full = `${BASE_URL.replace(/\/$/, '')}/${path}`
+      }
+
+      setShortUrl(shortUrlFromApi)
+      setShortUrlFull(full)
       queryClient.invalidateQueries({ queryKey: ["userUrls"] });
       setError(null);
     } catch (err) {
@@ -23,7 +36,8 @@ const UrlForm = () => {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(shortUrl);
+    // ensure we copy the actual full URL
+    navigator.clipboard.writeText(shortUrlFull || shortUrl);
     setCopied(true);
 
     // Reset the copied state after 2 seconds
@@ -110,7 +124,7 @@ const UrlForm = () => {
             <input
               type="text"
               readOnly
-              value={shortUrl}
+              value={shortUrlFull || shortUrl}
               className="flex-1 p-2 border border-gray-300 rounded-l-md bg-gray-50"
             />
             <button
@@ -124,6 +138,12 @@ const UrlForm = () => {
               {copied ? "Copied!" : "Copy"}
             </button>
           </div>
+          {/* Friendly display using 'shortly' as brand while keeping actual link intact */}
+          {shortUrlFull && (
+            <div className="mt-2 text-sm text-gray-600">
+              Friendly: <span className="font-semibold">{`shortly/${shortUrlFull.replace(/^https?:\/\//i, '').replace(/^.*?\//, '')}`}</span>
+            </div>
+          )}
         </div>
       )}
     </div>

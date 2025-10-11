@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getAllUserUrls } from '../api/user.api'
-import { BASE_URL } from '../utils/axiosInstance'
 
 const UserUrl = () => {
   const { data: urls, isLoading, isError, error } = useQuery({
@@ -75,12 +74,12 @@ const UserUrl = () => {
                 </td>
                 <td className="px-2 sm:px-6 py-4 max-w-[120px] sm:max-w-xs truncate">
                   <a
-                    href={`${BASE_URL.replace(/\/$/, '')}/${url.short_url}`}
+                    href={`http://localhost:3000/${url.short_url}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-indigo-700 hover:underline break-all font-semibold transition"
                   >
-                    {`${BASE_URL.replace(/\/$/, '')}/${url.short_url}`}
+                    {`localhost:3000/${url.short_url}`}
                   </a>
                 </td>
                 <td className="px-2 sm:px-6 py-4">
@@ -90,7 +89,7 @@ const UserUrl = () => {
                 </td>
                 <td className="px-2 sm:px-6 py-4 text-xs sm:text-sm font-medium">
                   <button
-                    onClick={() => handleCopy(`${BASE_URL.replace(/\/$/, '')}/${url.short_url}`, url._id)}
+                    onClick={() => handleCopy(`http://localhost:3000/${url.short_url}`, url._id)}
                     className={`inline-flex items-center px-3 py-1.5 border border-transparent font-semibold rounded-full shadow-md ${
                       copiedId === url._id
                         ? 'bg-green-500 text-white hover:bg-green-600'
@@ -133,12 +132,12 @@ const UserUrl = () => {
             <div className="mb-2">
               <span className="block text-xs text-blue-700 font-bold uppercase">Short URL</span>
               <a
-                href={`${BASE_URL.replace(/\/$/, '')}/${url.short_url}`}
+                href={`http://localhost:3000/${url.short_url}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-indigo-700 hover:underline break-all font-semibold transition"
               >
-                {`${BASE_URL.replace(/\/$/, '')}/${url.short_url}`}
+                {`localhost:3000/${url.short_url}`}
               </a>
             </div>
             <div className="mb-2">
@@ -149,7 +148,7 @@ const UserUrl = () => {
             </div>
             <div>
               <button
-                onClick={() => handleCopy(`${BASE_URL.replace(/\/$/, '')}/${url.short_url}`, url._id)}
+                onClick={() => handleCopy(`http://localhost:3000/${url.short_url}`, url._id)}
                 className={`inline-flex items-center px-3 py-1.5 border border-transparent font-semibold rounded-full shadow-md ${
                   copiedId === url._id
                     ? 'bg-green-500 text-white hover:bg-green-600'
