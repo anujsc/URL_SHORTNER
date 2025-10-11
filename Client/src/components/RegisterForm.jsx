@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { registerUser } from '../api/user.api';
+import Button from './Button';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/slice/authSlice';
 import { useNavigate } from '@tanstack/react-router';
@@ -108,10 +109,12 @@ const RegisterForm = ({ state }) => {
           />
         </div>
 
-        <button
-          className={`w-full py-2 px-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 flex items-center justify-center ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+        <Button
           type="submit"
+          variant="primary"
+          size="lg"
           disabled={loading}
+          style={{ width: '100%', borderRadius: '9999px', fontWeight: 'bold', boxShadow: '0 2px 8px rgba(79, 140, 255, 0.15)' }}
         >
           {loading ? (
             <>
@@ -124,7 +127,7 @@ const RegisterForm = ({ state }) => {
           ) : (
             'Create Account'
           )}
-        </button>
+        </Button>
 
         <div className="text-center mt-6">
           <p className="text-sm text-gray-600">

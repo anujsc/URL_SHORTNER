@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getAllUserUrls } from '../api/user.api'
 import { BASE_URL } from '../utils/axiosInstance'
+import Button from './Button';
+import Loader from './Loader';
 
 const UserUrl = () => {
   const { data: urls, isLoading, isError, error } = useQuery({
@@ -18,11 +20,7 @@ const UserUrl = () => {
   }
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center my-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    )
+    return <Loader text="Loading your URLs..." />;
   }
 
   if (isError) {
@@ -80,7 +78,7 @@ const UserUrl = () => {
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-indigo-700 hover:underline break-all font-semibold transition"
                   >
-                    {`${BASE_URL.replace(/\/$/, '')}/${url.short_url}`}
+                    {`shortly/${url.short_url}`}
                   </a>
                 </td>
                 <td className="px-2 sm:px-6 py-4">
@@ -89,13 +87,11 @@ const UserUrl = () => {
                   </span>
                 </td>
                 <td className="px-2 sm:px-6 py-4 text-xs sm:text-sm font-medium">
-                  <button
+                  <Button
                     onClick={() => handleCopy(`${BASE_URL.replace(/\/$/, '')}/${url.short_url}`, url._id)}
-                    className={`inline-flex items-center px-3 py-1.5 border border-transparent font-semibold rounded-full shadow-md ${
-                      copiedId === url._id
-                        ? 'bg-green-500 text-white hover:bg-green-600'
-                        : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700'
-                    } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 transition-all duration-200`}
+                    variant={copiedId === url._id ? 'success' : 'primary'}
+                    size="sm"
+                    style={{ borderRadius: '9999px', boxShadow: '0 2px 8px rgba(79, 140, 255, 0.15)' }}
                   >
                     {copiedId === url._id ? (
                       <>
@@ -112,7 +108,7 @@ const UserUrl = () => {
                         Copy URL
                       </>
                     )}
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}
@@ -124,8 +120,13 @@ const UserUrl = () => {
         {urls.urls.slice().reverse().map((url) => (
           <div
             key={url._id}
-            className="bg-gradient-to-br from-blue-50/80 via-white/80 to-indigo-50/80 rounded-2xl shadow-xl border border-blue-100 p-4 transition hover:scale-[1.01] hover:shadow-2xl"
+            className="bg-gradient-to-br from-blue-50/80 via-white/80 to-indigo-50/80 rounded-2xl shadow-xl border border-blue-100 p-4 transition-transform duration-200 hover:scale-105 hover:shadow-2xl flex flex-col gap-2 relative"
           >
+            <span className="absolute top-3 right-3 text-blue-400">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657A8 8 0 013.343 2.343m0 0A8 8 0 0116.657 17.657M3.343 2.343L21 21" />
+              </svg>
+            </span>
             <div className="mb-2">
               <span className="block text-xs text-blue-700 font-bold uppercase">Original URL</span>
               <span className="block text-gray-900 truncate">{url.full_url}</span>
@@ -138,7 +139,7 @@ const UserUrl = () => {
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-indigo-700 hover:underline break-all font-semibold transition"
               >
-                {`${BASE_URL.replace(/\/$/, '')}/${url.short_url}`}
+                {`shortly/${url.short_url}`}
               </a>
             </div>
             <div className="mb-2">
@@ -148,13 +149,11 @@ const UserUrl = () => {
               </span>
             </div>
             <div>
-              <button
+              <Button
                 onClick={() => handleCopy(`${BASE_URL.replace(/\/$/, '')}/${url.short_url}`, url._id)}
-                className={`inline-flex items-center px-3 py-1.5 border border-transparent font-semibold rounded-full shadow-md ${
-                  copiedId === url._id
-                    ? 'bg-green-500 text-white hover:bg-green-600'
-                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700'
-                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 transition-all duration-200`}
+                variant={copiedId === url._id ? 'success' : 'primary'}
+                size="sm"
+                style={{ borderRadius: '9999px', boxShadow: '0 2px 8px rgba(79, 140, 255, 0.15)' }}
               >
                 {copiedId === url._id ? (
                   <>
@@ -171,7 +170,7 @@ const UserUrl = () => {
                     Copy URL
                   </>
                 )}
-              </button>
+              </Button>
             </div>
           </div>
         ))}

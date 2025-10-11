@@ -1,0 +1,123 @@
+/* Modern, minimal, accessible button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.18s, color 0.18s, transform 0.18s cubic-bezier(.4,0,.2,1);
+  padding: 0.5em 1.2em;
+  font-size: 1rem;
+  outline: none;
+  min-width: 44px;
+  min-height: 44px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Primary button with smooth gradient and shadow */
+.btn-primary {
+  background: linear-gradient(90deg, #4f8cff 0%, #1e40af 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.15);
+}
+.btn-primary:hover:not(:disabled),
+.btn-primary:focus-visible {
+  background: linear-gradient(90deg, #1e40af 0%, #4f8cff 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(79,140,255,0.18);
+}
+.btn-primary:active {
+  background: #1e40af;
+  transform: scale(0.98);
+}
+
+/* Secondary button */
+.btn-secondary {
+  background: #f3f4f6;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
+}
+.btn-secondary:hover:not(:disabled),
+.btn-secondary:focus-visible {
+  background: #e5e7eb;
+  transform: translateY(-2px) scale(1.04);
+}
+.btn-secondary:active {
+  background: #e5e7eb;
+  transform: scale(0.98);
+}
+
+/* Danger button */
+.btn-danger {
+  background: #ef4444;
+  color: #fff;
+}
+.btn-danger:hover:not(:disabled),
+.btn-danger:focus-visible {
+  background: #dc2626;
+  transform: translateY(-2px) scale(1.04);
+}
+.btn-danger:active {
+  background: #dc2626;
+  transform: scale(0.98);
+}
+
+/* Button sizes */
+.btn-md {
+  font-size: 1rem;
+  padding: 0.5em 1.2em;
+}
+.btn-lg {
+  font-size: 1.15rem;
+  padding: 0.7em 1.5em;
+}
+.btn-sm {
+  font-size: 0.92rem;
+  padding: 0.4em 0.9em;
+}
+
+/* Disabled state */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Microinteraction: content and icon */
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  justify-content: center;
+}
+.btn-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+  transition: transform 0.18s;
+}
+.btn:hover .btn-icon,
+.btn:focus-visible .btn-icon {
+  transform: translateX(2px) scale(1.1);
+}
+
+/* Accessibility: focus ring */
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(66,153,225,0.4);
+  outline: none;
+}
+
+/* Responsive and touch-friendly */
+@media (max-width: 600px) {
+  .btn {
+    font-size: 0.98rem;
+    padding: 0.45em 0.9em;
+    min-width: 38px;
+    min-height: 38px;
+  }
+  .btn-content {
+    gap: 0.4em;
+  }
+}

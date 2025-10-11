@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { createShortUrl } from "../api/shortUrl.api";
+import Button from './Button';
+import Loader from './Loader';
 import { useSelector } from "react-redux";
 import { queryClient } from "../client";
 
@@ -9,9 +11,11 @@ const UrlForm = () => {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState(null);
   const [customSlug, setCustomSlug] = useState("");
+  const [loading, setLoading] = useState(false);
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   const handleSubmit = async () => {
+    setLoading(true);
     try {
       const shortUrl = await createShortUrl(url, customSlug);
       setShortUrl(shortUrl);
@@ -19,6 +23,8 @@ const UrlForm = () => {
       setError(null);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,6 +41,7 @@ const UrlForm = () => {
 
   return (
     <div className="space-y-4">
+      {loading && <Loader text="Shortening your URL..." />}
       <div>
         <label
           htmlFor="url"
@@ -74,13 +81,15 @@ const UrlForm = () => {
           />
         </div>
       </div>
-      <button
+      <Button
         onClick={handleSubmit}
         type="submit"
-        className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+        variant="primary"
+        size="lg"
+        style={{ width: '100%', borderRadius: '8px' }}
       >
         Shorten URL
-      </button>
+      </Button>
       {error && (
         <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
           {error}
@@ -116,16 +125,14 @@ const UrlForm = () => {
               value={shortUrl}
               className="flex-1 p-2 border border-gray-300 rounded-l-md bg-gray-50"
             />
-            <button
+            <Button
               onClick={handleCopy}
-              className={`px-4 py-2 rounded-r-md transition-colors duration-200 ${
-                copied
-                  ? "bg-green-500 text-white hover:bg-green-600"
-                  : "bg-gray-200 hover:bg-gray-300"
-              }`}
+              variant={copied ? "success" : "secondary"}
+              size="md"
+              style={{ borderRadius: '0 8px 8px 0' }}
             >
               {copied ? "Copied!" : "Copy"}
-            </button>
+            </Button>
           </div>
         </div>
       )}

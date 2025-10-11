@@ -14,10 +14,10 @@ dotenv.config("./.env")
 
 const app = express();
 
-const FRONTEND_ORIGINS =  'https://url-shortner-f-vwjq.onrender.com'
-  .split(',')
-  .map(s => s.trim())
-  .filter(Boolean)
+const FRONTEND_ORIGINS = [
+  'https://url-shortner-f-vwjq.onrender.com',
+  'http://localhost:5173'
+];
 
 app.use(cors({
   origin: (origin, cb) => {
