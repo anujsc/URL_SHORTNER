@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE_URL ='https://url-shortner-1-nn0p.onrender.com';
+const BASE_URL ='http://localhost:3000';
 //  import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 const axiosInstance = axios.create({

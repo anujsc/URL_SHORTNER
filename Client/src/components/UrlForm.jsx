@@ -31,6 +31,7 @@ const UrlForm = () => {
       setCopied(false);
     }, 2000);
   };
+  console.log("Short URL:", shortUrl);
 
   return (
     <div className="space-y-4">
@@ -103,6 +104,8 @@ const UrlForm = () => {
           />
         </div>
       )}
+
+      
       {shortUrl && (
         <div className="mt-6">
           <h2 className="text-lg font-semibold mb-2">Your shortened URL:</h2>
